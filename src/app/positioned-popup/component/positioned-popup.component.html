@@ -1,0 +1,19 @@
+<div #background class="background" (click)="closePopup()">
+  <div [class.hidden]="!visible">
+    <div
+      class="positioned-popup-latch"
+      [class.positioned-popup-latch-left]="latchOrientationHorizontal && growRightward"
+      [class.positioned-popup-latch-right]="latchOrientationHorizontal && !growRightward"
+      [class.positioned-popup-latch-up]="!latchOrientationHorizontal && growDownward"
+      [class.positioned-popup-latch-down]="!latchOrientationHorizontal && !growDownward"
+      [ngStyle]="dynamicLatchStyle"
+      (click)="ignoreClick($event)"
+    ></div>
+
+    <div #positionedPopup class="positioned-popup" [ngStyle]="dynamicPopupStyle" (click)="ignoreClick($event)">
+      <div class="positioned-popup-content">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

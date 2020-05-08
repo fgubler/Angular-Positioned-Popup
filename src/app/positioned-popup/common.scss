@@ -1,0 +1,32 @@
+// Mixins
+@mixin leftward-triangle($dimensions, $color-triangle) {
+  width: 0;
+  height: 0;
+  border-right: $dimensions solid $color-triangle;
+  border-top: $dimensions solid transparent;
+  border-bottom: $dimensions solid transparent;
+}
+
+@mixin rightward-triangle($dimensions, $color-triangle) {
+  width: 0;
+  height: 0;
+  border-left: $dimensions solid $color-triangle;
+  border-top: $dimensions solid transparent;
+  border-bottom: $dimensions solid transparent;
+}
+
+@mixin upward-triangle($dimensions, $color-triangle) {
+  width: 0;
+  height: 0;
+  border-bottom: $dimensions solid $color-triangle;
+  border-left: $dimensions solid transparent;
+  border-right: $dimensions solid transparent;
+}
+
+@mixin downward-triangle($dimensions, $color-triangle) {
+  width: 0;
+  height: 0;
+  border-top: $dimensions solid $color-triangle;
+  border-left: $dimensions solid transparent;
+  border-right: $dimensions solid transparent;
+}
