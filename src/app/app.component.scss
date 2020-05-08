@@ -1,0 +1,15 @@
+
+$distance-to-edge: 50px;
+
+.popup-trigger {
+  width: 40px;
+  height: 40px;
+  background-color: blue;
+  cursor: pointer;
+}
+
+.top-left {
+  position: absolute;
+  left: $distance-to-edge;
+  top: $distance-to-edge;
+}
