@@ -13,6 +13,7 @@ import {
 })
 export class AppComponent {
   @ViewChild('topLeft', {static: true}) private topLeft: ElementRef<HTMLInputElement>;
+  @ViewChild('topRight', {static: true}) private topRight: ElementRef<HTMLInputElement>;
 
   readonly tooltip = 'Click to open popup!';
 
@@ -20,12 +21,12 @@ export class AppComponent {
     private popupService: PopupService
   ) {}
 
-  onClickTopLeft(event: MouseEvent) {
+  onClick(event: MouseEvent, elemName: string, latchVertical?: boolean) {
     const clickedCoordinates = createPixelCoordinatesFromMouseEvent(event);
-    const boxClickEvent = createBoxClickEvent(clickedCoordinates, this.topLeft.nativeElement);
+    const boxClickEvent = createBoxClickEvent(clickedCoordinates, this[elemName].nativeElement);
     const popupData = {
       clickEvent: boxClickEvent,
-      latchOrientation: LatchOrientation.horizontal,
+      latchOrientation: latchVertical ? LatchOrientation.vertical : LatchOrientation.horizontal,
     };
     this.popupService.openOverlay(popupData);
   }
