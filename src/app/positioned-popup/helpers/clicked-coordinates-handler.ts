@@ -2,17 +2,7 @@ import {IPixelCoordinates} from "../models/IPixelCoordinates";
 import {IBoxClickEvent} from "../models/IBoxClickEvent";
 import {IBoxLineCenterPoints} from "../models/IBoxLineCenterPoints";
 import {LatchOrientation} from "../enums/latch-orientation";
-
-const latchPositionCorrection = {
-  [LatchOrientation.horizontal]: {
-    topPx: -2,
-    leftPx: 0,
-  },
-  [LatchOrientation.vertical]: {
-    topPx: 0,
-    leftPx: -2.3,
-  }
-};
+import {latchPositionCorrection} from "./coordinates-corrections";
 
 /**
  * Helper class to determine the exact coordinates to be touched by the user.
