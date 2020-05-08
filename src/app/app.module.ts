@@ -3,14 +3,23 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {PositionedPopupModule} from "./positioned-popup/positioned-popup.module";
+import { ExamplePopupComponent } from './example-popup/example-popup.component';
+import {CommonModule} from "@angular/common";
+import {OverlayModule} from "@angular/cdk/overlay";
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
-    PositionedPopupModule
+    PositionedPopupModule,
+    CommonModule,
+    OverlayModule
+  ],
+  declarations: [
+    AppComponent,
+    ExamplePopupComponent,
+  ],
+  entryComponents: [
+    ExamplePopupComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
