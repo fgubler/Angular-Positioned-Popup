@@ -15,6 +15,7 @@ import {LatchOrientation} from "../enums/latch-orientation";
 import {BadBrowser} from "../enums/BadBrowser";
 import {IPixelCoordinates} from "../models/IPixelCoordinates";
 import {latchPositionCorrection} from "../helpers/coordinates-corrections";
+import {createBoxClickEvent, createPixelCoordinatesFromMouseEvent} from "../helpers/click-event-creation";
 
 const px = 'px';
 const unset = 'unset';
@@ -35,6 +36,8 @@ const marginToViewPortPx = 2; // make sure the popup stays on the screen
  *
  * Beware: Depending on the project-setup, a small, static pixel-correction is needed for the position.
  * Change the values in {@see latchPositionCorrection} to account for that.
+ *
+ * Also see {@see createBoxClickEvent} and {@see createPixelCoordinatesFromMouseEvent} to create the necessary inputs.
  *
  * Naming:
  *  - main-axis: the axis defined by {@see _latchOrientation}
