@@ -14,6 +14,13 @@ import {
 export class AppComponent {
   @ViewChild('topLeft', {static: true}) private topLeft: ElementRef<HTMLInputElement>;
   @ViewChild('topRight', {static: true}) private topRight: ElementRef<HTMLInputElement>;
+  @ViewChild('bottomLeft', {static: true}) private bottomLeft: ElementRef<HTMLInputElement>;
+  @ViewChild('bottomRight', {static: true}) private bottomRight: ElementRef<HTMLInputElement>;
+
+  @ViewChild('centerTopLeft', {static: true}) private centerTopLeft: ElementRef<HTMLInputElement>;
+  @ViewChild('centerTopRight', {static: true}) private centerTopRight: ElementRef<HTMLInputElement>;
+  @ViewChild('centerBottomLeft', {static: true}) private centerBottomLeft: ElementRef<HTMLInputElement>;
+  @ViewChild('centerBottomRight', {static: true}) private centerBottomRight: ElementRef<HTMLInputElement>;
 
   readonly tooltip = 'Click to open popup!';
 

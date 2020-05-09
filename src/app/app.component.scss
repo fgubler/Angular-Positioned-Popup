@@ -1,4 +1,5 @@
-$distance-to-edge: 50px;
+$distance-to-edge-corners: 50px;
+$distance-to-edge-middle: 25%;
 
 .popup-trigger {
   width: 40px;
@@ -8,12 +9,44 @@ $distance-to-edge: 50px;
   position: absolute;
 }
 
+// corners
 .top-left {
-  left: $distance-to-edge;
-  top: $distance-to-edge;
+  left: $distance-to-edge-corners;
+  top: $distance-to-edge-corners;
 }
 
 .top-right {
-  right: $distance-to-edge;
-  top: $distance-to-edge;
+  right: $distance-to-edge-corners;
+  top: $distance-to-edge-corners;
+}
+
+.bottom-left {
+  left: $distance-to-edge-corners;
+  bottom: $distance-to-edge-corners;
+}
+
+.bottom-right {
+  right: $distance-to-edge-corners;
+  bottom: $distance-to-edge-corners;
+}
+
+// center
+.center-top-left {
+  left: $distance-to-edge-middle;
+  top: $distance-to-edge-middle;
+}
+
+.center-top-right {
+  right: $distance-to-edge-middle;
+  top: $distance-to-edge-middle;
+}
+
+.center-bottom-left {
+  left: $distance-to-edge-middle;
+  bottom: $distance-to-edge-middle;
+}
+
+.center-bottom-right {
+  right: $distance-to-edge-middle;
+  bottom: $distance-to-edge-middle;
 }

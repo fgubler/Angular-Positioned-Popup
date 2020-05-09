@@ -1,3 +1,4 @@
+<!-- Corners -->
 <div
   #topLeft
   class="popup-trigger top-left"
@@ -10,4 +11,48 @@
   class="popup-trigger top-right"
   [title]="tooltip"
   (click)="onClick($event, 'topRight')"
+></div>
+
+<div
+  #bottomLeft
+  class="popup-trigger bottom-left"
+  [title]="tooltip"
+  (click)="onClick($event, 'bottomLeft')"
+></div>
+
+<div
+  #bottomRight
+  class="popup-trigger bottom-right"
+  [title]="tooltip"
+  (click)="onClick($event, 'bottomRight')"
+></div>
+
+<!-- Center -->
+
+<div
+  #centerTopLeft
+  class="popup-trigger center-top-left"
+  [title]="tooltip"
+  (click)="onClick($event, 'centerTopLeft', true)"
+></div>
+
+<div
+  #centerTopRight
+  class="popup-trigger center-top-right"
+  [title]="tooltip"
+  (click)="onClick($event, 'centerTopRight', true)"
+></div>
+
+<div
+  #centerBottomLeft
+  class="popup-trigger center-bottom-left"
+  [title]="tooltip"
+  (click)="onClick($event, 'centerBottomLeft', true)"
+></div>
+
+<div
+  #centerBottomRight
+  class="popup-trigger center-bottom-right"
+  [title]="tooltip"
+  (click)="onClick($event, 'centerBottomRight', true)"
 ></div>
