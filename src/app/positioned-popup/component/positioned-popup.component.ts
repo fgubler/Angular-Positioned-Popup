@@ -14,6 +14,7 @@ import {IBoxClickEvent} from "../models/IBoxClickEvent";
 import {LatchOrientation} from "../enums/latch-orientation";
 import {BadBrowser} from "../enums/BadBrowser";
 import {IPixelCoordinates} from "../models/IPixelCoordinates";
+import {latchPositionCorrection} from "../helpers/coordinates-corrections";
 
 const px = 'px';
 const unset = 'unset';
@@ -31,6 +32,9 @@ const marginToViewPortPx = 2; // make sure the popup stays on the screen
  *  - case {@see PositionedPopupLatchOrientation.vertical}:
  *    - the container will grow from the latch downwards if the click is in the upper half of the screen; otherwise upwards.
  *    - the container will grow from the latch leftwards if the click is in the right half of the screen; otherwise rightwards.
+ *
+ * Beware: Depending on the project-setup, a small, static pixel-correction is needed for the position.
+ * Change the values in {@see latchPositionCorrection} to account for that.
  *
  * Naming:
  *  - main-axis: the axis defined by {@see _latchOrientation}
