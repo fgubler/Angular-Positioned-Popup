@@ -15,3 +15,19 @@ This is a generic component to show a popup which is shown at a specific point o
 ## Known Issues
 - The popup positioning breaks if the browser-window is resized after opening the popup. It then needs to be closed an reopened for the positioning to become correct again.
 
+## Screenshots
+
+### Horizontal Latch
+| | |
+| --- | --- |
+|![Top Left Horizontal](./screenshots/Top-Left.png) |![Top Right Horizontal](./screenshots/Top-Right.png) |
+|![Bottom Left Horizontal](./screenshots/Bottom-Left.png) |![Bottom Right Horizontal](./screenshots/Bottom-Right.png) |
+| | |
+
+### Vertical Latch
+| | |
+| --- | --- |
+|![Top Left Vertical](./screenshots/Top-Left-Vertical.png) |![Top Right Vertical](./screenshots/Top-Right-Vertical.png) |
+|![Bottom Left Vertical](./screenshots/Bottom-Left-Vertical.png) |![Bottom Right Vertical](./screenshots/Bottom-Right-Vertical.png) |
+| | |
+
