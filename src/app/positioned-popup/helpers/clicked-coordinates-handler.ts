@@ -63,12 +63,13 @@ export class ClickedCoordinatesHandler {
 
     if (!isBoxClickEvent) {
       const clickedCoordinates = clickEvent as IPixelCoordinates;
+      const correctedCoordinates = this._correctCoordinates(clickedCoordinates, latchOrientationHorizontal, correction);
 
       return {
-        topCenter: clickedCoordinates,
-        bottomCenter: clickedCoordinates,
-        centerLeft: clickedCoordinates,
-        centerRight: clickedCoordinates,
+        topCenter: correctedCoordinates,
+        bottomCenter: correctedCoordinates,
+        centerLeft: correctedCoordinates,
+        centerRight: correctedCoordinates,
       };
     }
 
