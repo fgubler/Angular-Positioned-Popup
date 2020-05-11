@@ -1,9 +1,10 @@
 import {IBoxClickEvent} from "../positioned-popup/models/IBoxClickEvent";
 import {LatchOrientation} from "../positioned-popup/enums/latch-orientation";
 import {InjectionToken} from "@angular/core";
+import {IPixelCoordinates} from "../positioned-popup/models/IPixelCoordinates";
 
 export interface IPopupData {
-  clickEvent: IBoxClickEvent;
+  clickEvent: IBoxClickEvent | IPixelCoordinates;
   latchOrientation: LatchOrientation;
 }
 
