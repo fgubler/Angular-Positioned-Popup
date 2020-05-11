@@ -4,7 +4,7 @@ import {LatchOrientation} from "./positioned-popup/enums/latch-orientation";
 import {
   createBoxClickEvent,
   createPixelCoordinatesFromMouseEvent
-} from "./positioned-popup/helpers/click-event-creation";
+} from "./positioned-popup/click-event-creation";
 
 @Component({
   selector: 'app-root',
@@ -30,7 +30,7 @@ export class AppComponent {
 
   onClick(event: MouseEvent, elemName: string, latchVertical?: boolean) {
     const clickedCoordinates = createPixelCoordinatesFromMouseEvent(event);
-    const boxClickEvent = createBoxClickEvent(clickedCoordinates, this[elemName].nativeElement);
+    const boxClickEvent = createBoxClickEvent(this[elemName].nativeElement);
     const popupData = {
       clickEvent: boxClickEvent,
       latchOrientation: latchVertical ? LatchOrientation.vertical : LatchOrientation.horizontal,

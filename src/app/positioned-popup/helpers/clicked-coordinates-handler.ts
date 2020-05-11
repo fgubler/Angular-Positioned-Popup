@@ -22,7 +22,7 @@ export class ClickedCoordinatesHandler {
   /**
    * Rerun the computations
    */
-  update(clickEvent: IBoxClickEvent, latchOrientationHorizontal: boolean, correction: ICoordinatesCorrection) {
+  update(clickEvent: IPixelCoordinates | IBoxClickEvent, latchOrientationHorizontal: boolean, correction: ICoordinatesCorrection) {
     const box = this._getBoxPointsOfInterest(clickEvent, latchOrientationHorizontal, correction);
 
     this._updateGrowDownward(box.centerLeft);
@@ -57,18 +57,22 @@ export class ClickedCoordinatesHandler {
   // =====================================================================
 
   private _getBoxPointsOfInterest(
-    clickEvent: IBoxClickEvent, latchOrientationHorizontal: boolean, correction: ICoordinatesCorrection
+    clickEvent: IPixelCoordinates | IBoxClickEvent, latchOrientationHorizontal: boolean, correction: ICoordinatesCorrection
   ): IBoxLineCenterPoints {
-    const clickedBox = clickEvent.clickedBox;
+    const isBoxClickEvent = 'clickedBox' in clickEvent;
 
-    if (!clickedBox) {
+    if (!isBoxClickEvent) {
+      const clickedCoordinates = clickEvent as IPixelCoordinates;
+
       return {
-        topCenter: clickEvent.clickedPosition,
-        bottomCenter: clickEvent.clickedPosition,
-        centerLeft: clickEvent.clickedPosition,
-        centerRight: clickEvent.clickedPosition,
+        topCenter: clickedCoordinates,
+        bottomCenter: clickedCoordinates,
+        centerLeft: clickedCoordinates,
+        centerRight: clickedCoordinates,
       };
     }
+
+    const clickedBox = (clickEvent as IBoxClickEvent).clickedBox;
 
     clickedBox.topLeftCorner = this._correctCoordinates(
       clickedBox.topLeftCorner, latchOrientationHorizontal, correction
@@ -100,7 +104,7 @@ export class ClickedCoordinatesHandler {
     if (!coordinatesCorrection) {
       return coordinates; // nothing to correct
     }
-    
+
     if (latchOrientationHorizontal) {
       return {
         leftPx: coordinates.leftPx + coordinatesCorrection[LatchOrientation.horizontal].leftPx,

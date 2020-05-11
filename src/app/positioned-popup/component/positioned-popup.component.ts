@@ -14,7 +14,7 @@ import {IBoxClickEvent} from "../models/IBoxClickEvent";
 import {LatchOrientation} from "../enums/latch-orientation";
 import {BadBrowser} from "../enums/BadBrowser";
 import {IPixelCoordinates} from "../models/IPixelCoordinates";
-import {createBoxClickEvent, createPixelCoordinatesFromMouseEvent} from "../helpers/click-event-creation";
+import {createBoxClickEvent, createPixelCoordinatesFromMouseEvent} from "../click-event-creation";
 import {ICoordinatesCorrection} from "../models/ICoordinatesCorrection";
 
 const px = 'px';
@@ -57,7 +57,7 @@ export class PositionedPopupComponent implements OnChanges {
    * If a box is passed, the popup will be positioned to touch the bounds of that box.
    * If no box is passed, the popup will be positioned to touch the clicked coordinates.
    */
-  @Input() clickEvent: IBoxClickEvent;
+  @Input() clickEvent: IPixelCoordinates | IBoxClickEvent;
 
   /**
    * If set to {@see LatchOrientation.vertical}, the latch is positioned either above or below the clicked coordinates.

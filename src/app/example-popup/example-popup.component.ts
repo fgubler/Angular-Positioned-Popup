@@ -29,7 +29,6 @@ export class ExamplePopupComponent {
   ) {}
 
   onPopupClosed() {
-    console.log('Popup closed');
     this.overlayRef.dispose();
   }
 }
