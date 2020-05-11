@@ -14,8 +14,8 @@ import {IBoxClickEvent} from "../models/IBoxClickEvent";
 import {LatchOrientation} from "../enums/latch-orientation";
 import {BadBrowser} from "../enums/BadBrowser";
 import {IPixelCoordinates} from "../models/IPixelCoordinates";
-import {latchPositionCorrection} from "../helpers/coordinates-corrections";
 import {createBoxClickEvent, createPixelCoordinatesFromMouseEvent} from "../helpers/click-event-creation";
+import {ICoordinatesCorrection} from "../models/ICoordinatesCorrection";
 
 const px = 'px';
 const unset = 'unset';
@@ -35,7 +35,7 @@ const marginToViewPortPx = 2; // make sure the popup stays on the screen
  *    - the container will grow from the latch leftwards if the click is in the right half of the screen; otherwise rightwards.
  *
  * Beware: Depending on the project-setup, a small, static pixel-correction is needed for the position.
- * Change the values in {@see latchPositionCorrection} to account for that.
+ * Set {@see coordinatesCorrection} to account for that.
  *
  * Also see {@see createBoxClickEvent} and {@see createPixelCoordinatesFromMouseEvent} to create the necessary inputs.
  *
@@ -55,14 +55,28 @@ export class PositionedPopupComponent implements OnChanges {
   /**
    * @param clickEvent describes the box which was clicked.
    * If a box is passed, the popup will be positioned to touch the bounds of that box.
-   * If no box is passed, the popup will be positioned to touche the clicked coordinates.
+   * If no box is passed, the popup will be positioned to touch the clicked coordinates.
    */
   @Input() clickEvent: IBoxClickEvent;
+
+  /**
+   * If set to {@see LatchOrientation.vertical}, the latch is positioned either above or below the clicked coordinates.
+   * Otherwise it is positioned either to the left or right of them.
+   */
   @Input() latchOrientation: LatchOrientation;
 
-  @Input() readonly visible: boolean;
-  @Input() readonly applyCorrectionForBrowser: BadBrowser; // some browsers have problems e.g. with the viewport-height
+  /**
+   * Some browsers cannot properly declare their viewport-height.
+   */
+  @Input() readonly applyCorrectionForBrowser: BadBrowser;
 
+  /**
+   * Depending on the project-setup, there is a static offset between the "correct coordinates, where the latch should point
+   * and the coordinates returned by the browser => account for this problem by setting these corrections.
+   */
+  @Input() readonly coordinatesCorrection: ICoordinatesCorrection;
+
+  @Input() readonly visible: boolean;
   @Output() readonly popupClosed = new EventEmitter<void>();
 
   private readonly _coordinatesHandler: ClickedCoordinatesHandler;
@@ -103,7 +117,7 @@ export class PositionedPopupComponent implements OnChanges {
   // =====================================================================
 
   private _updateDynamicStyles() {
-    this._coordinatesHandler.update(this.clickEvent, this.latchOrientationHorizontal);
+    this._coordinatesHandler.update(this.clickEvent, this.latchOrientationHorizontal, this.coordinatesCorrection);
     this._updatePopupStyle(this._coordinatesHandler.coordinatesToTouch);
     this._updateLatchStyle(this._coordinatesHandler.coordinatesToTouch);
   }

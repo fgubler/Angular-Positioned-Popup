@@ -2,7 +2,7 @@ import {IPixelCoordinates} from "../models/IPixelCoordinates";
 import {IBoxClickEvent} from "../models/IBoxClickEvent";
 import {IBoxLineCenterPoints} from "../models/IBoxLineCenterPoints";
 import {LatchOrientation} from "../enums/latch-orientation";
-import {latchPositionCorrection} from "./coordinates-corrections";
+import {ICoordinatesCorrection} from "../models/ICoordinatesCorrection";
 
 /**
  * Helper class to determine the exact coordinates to be touched by the user.
@@ -22,8 +22,8 @@ export class ClickedCoordinatesHandler {
   /**
    * Rerun the computations
    */
-  update(clickEvent: IBoxClickEvent, latchOrientationHorizontal: boolean) {
-    const box = this._getBoxPointsOfInterest(clickEvent, latchOrientationHorizontal);
+  update(clickEvent: IBoxClickEvent, latchOrientationHorizontal: boolean, correction: ICoordinatesCorrection) {
+    const box = this._getBoxPointsOfInterest(clickEvent, latchOrientationHorizontal, correction);
 
     this._updateGrowDownward(box.centerLeft);
     this._updateGrowRightward(box.topCenter);
@@ -56,7 +56,9 @@ export class ClickedCoordinatesHandler {
   // ========================= Computation Logic =========================
   // =====================================================================
 
-  private _getBoxPointsOfInterest(clickEvent: IBoxClickEvent, latchOrientationHorizontal: boolean): IBoxLineCenterPoints {
+  private _getBoxPointsOfInterest(
+    clickEvent: IBoxClickEvent, latchOrientationHorizontal: boolean, correction: ICoordinatesCorrection
+  ): IBoxLineCenterPoints {
     const clickedBox = clickEvent.clickedBox;
 
     if (!clickedBox) {
@@ -68,7 +70,9 @@ export class ClickedCoordinatesHandler {
       };
     }
 
-    clickedBox.topLeftCorner = this._correctClickedBoxCoordinates(clickedBox.topLeftCorner, latchOrientationHorizontal);
+    clickedBox.topLeftCorner = this._correctCoordinates(
+      clickedBox.topLeftCorner, latchOrientationHorizontal, correction
+    );
 
     return {
       topCenter: {
@@ -90,21 +94,23 @@ export class ClickedCoordinatesHandler {
     };
   }
 
-  /**
-   * for some reason, the coordinates of a clicked box ({@param boxCoordinates}) must be slightly corrected to get a nicely
-   * centered latch.
-   */
-  private _correctClickedBoxCoordinates(boxCoordinates: IPixelCoordinates, latchOrientationHorizontal: boolean): IPixelCoordinates {
+  private _correctCoordinates(
+    coordinates: IPixelCoordinates, latchOrientationHorizontal: boolean, coordinatesCorrection: ICoordinatesCorrection
+  ): IPixelCoordinates {
+    if (!coordinatesCorrection) {
+      return coordinates; // nothing to correct
+    }
+    
     if (latchOrientationHorizontal) {
       return {
-        leftPx: boxCoordinates.leftPx + latchPositionCorrection[LatchOrientation.horizontal].leftPx,
-        topPx: boxCoordinates.topPx + latchPositionCorrection[LatchOrientation.horizontal].topPx,
+        leftPx: coordinates.leftPx + coordinatesCorrection[LatchOrientation.horizontal].leftPx,
+        topPx: coordinates.topPx + coordinatesCorrection[LatchOrientation.horizontal].topPx,
       };
     }
 
     return {
-      leftPx: boxCoordinates.leftPx + latchPositionCorrection[LatchOrientation.vertical].leftPx,
-      topPx: boxCoordinates.topPx + latchPositionCorrection[LatchOrientation.vertical].topPx,
+      leftPx: coordinates.leftPx + coordinatesCorrection[LatchOrientation.vertical].leftPx,
+      topPx: coordinates.topPx + coordinatesCorrection[LatchOrientation.vertical].topPx,
     };
   }
 
