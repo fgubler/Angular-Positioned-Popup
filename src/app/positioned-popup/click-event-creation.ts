@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2020. Florian Gubler
- */
-
 import {IPixelCoordinates} from "./models/IPixelCoordinates";
 import {IBoxClickEvent} from "./models/IBoxClickEvent";
 
