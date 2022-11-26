@@ -13,6 +13,7 @@ This is a generic component to show a popup which is shown at a specific point o
 
 ## Suggestions
 - Use CDK-Overlays to show the popup component, as shown in the example application.
+- This code is not actively maintained: If you want to use it, update all the dependencies first (mainly Angular).
 
 ## Known Issues
 - The popup positioning breaks if the browser-window is resized after opening the popup. It then needs to be closed an reopened for the positioning to become correct again.
